@@ -1,12 +1,13 @@
-# Python caches
+# Python System Files
 __pycache__/
-
-# Virtual Environment (මේක කොහොමත් යවන්නේ නෑ)
 venv/
 env/
 
-# Database (මේක යවන්න එපා, Run කරනකොට අලුතෙන් හැදෙනවා)
+# Local Database (මේක යවන්න එපා)
 face_database.db
 
-# Uploads (පරණ ෆොටෝ යවන්න එපා)
+# Uploaded Photos (පෞද්ගලික දත්ත)
 known_faces/
+
+# YOLO Model File (Run කරනකොට Auto Download වෙයි)
+yolov8n.pt
