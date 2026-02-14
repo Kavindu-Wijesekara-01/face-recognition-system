@@ -1,42 +1,42 @@
-# 📷 Intelligent Face Recognition & Security System
+# 📷 AI Security System: Face Recognition & Object Detection
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
-![Flask](https://img.shields.io/badge/Flask-Web%20Framework-lightgrey?style=for-the-badge&logo=flask)
-![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=for-the-badge&logo=opencv)
+![YOLOv8](https://img.shields.io/badge/YOLO-v8-orange?style=for-the-badge&logo=yolo)
+![Flask](https://img.shields.io/badge/Flask-Web-lightgrey?style=for-the-badge&logo=flask)
+![OpenCV](https://img.shields.io/badge/OpenCV-Vision-green?style=for-the-badge&logo=opencv)
 
-
-A robust, real-time Web CCTV and Face Recognition system built with Python 3.11. This system is designed to detect faces, count visitors in real-time, and trigger **RED ALERTS** when a specific person from the watchlist is identified.
+A comprehensive real-time security dashboard powered by AI. This system performs **Face Recognition** to identify specific individuals and **Object Detection** (using YOLOv8) to identify items like mobile phones, bottles, and bags simultaneously.
 
 ---
 
 ## 🚀 Key Features
 
-* **Real-time Face Detection:** Uses advanced AI to detect and track faces via webcam.
-* **Watchlist Alert System:** Upload a photo to the system, and it will instantly trigger a **RED ALERT** if that person appears on camera.
-* **Live Visitor Counting:** Accurate real-time counting of people in the frame.
-* **Crash-Proof Image Handling:** Integrated with OpenCV for safe image processing and upload stability.
-* **Auto-Updating Dashboard:** Live logs update automatically without refreshing the page (AJAX).
-* **Database Logging:** Detection history is saved to a SQLite database.
+### 👤 Face Recognition
+* **Real-time Identification:** Detects faces and matches them against a watchlist.
+* **Red Alert System:** Triggers a visual **RED ALERT** if a watchlist person is detected.
+* **Visitor Counting:** Counts human faces in real-time.
+* **Auto-Learning:** Upload a photo via the dashboard, and the system learns the face instantly without restarting.
+
+### 📦 Object Detection (New!)
+* **Powered by YOLOv8:** Uses the state-of-the-art YOLO model for ultra-fast detection.
+* **Item Recognition:** Identifies common objects like **Phones, Laptops, Bottles, Bags, etc.**
+* **Performance Optimized:** Uses frame skipping and resizing to run smoothly on standard CPUs.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Language:** Python 3.11 (Strictly Recommended)
-* **Backend:** Flask
-* **Computer Vision:** OpenCV (`cv2`), `face_recognition`, `dlib`
-* **Frontend:** HTML5, Bootstrap 5, JavaScript
-* **Database:** SQLite3
+* **Core:** Python 3.11
+* **Web Framework:** Flask
+* **AI Models:** * `face_recognition` (dlib) for Faces
+  * `ultralytics` (YOLOv8) for Objects
+* **Database:** SQLite3 (for logging alerts)
 
 ---
 
 ## ⚙️ Installation & Setup
 
-This project is optimized for **Python 3.11**. Follow these steps to clone and run the project.
-
 ### 1. Clone the Repository
-Open your terminal or command prompt and run:
-
 ```bash
 git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
 cd your-repo-name

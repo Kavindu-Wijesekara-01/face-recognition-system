@@ -7,6 +7,9 @@ import sqlite3
 import time
 from datetime import datetime
 
+# --- NEW: අලුත් ෆයිල් එක සම්බන්ධ කිරීම ---
+from object_detector import ObjectDetector
+
 app = Flask(__name__)
 
 # --- Settings ---
@@ -37,6 +40,10 @@ init_db()
 # --- Global Variables ---
 known_face_encodings = []
 known_face_names = []
+
+# --- NEW: Object Detector එක පණ ගැන්වීම ---
+# මේක එක පාරයි රන් වෙන්නේ.
+obj_detector = ObjectDetector()
 
 # --- Add Face Function ---
 def add_face_to_system(filepath, filename, init=False):
@@ -97,16 +104,20 @@ def generate_frames():
             success, frame = camera.read()
             if not success or frame is None:
                 continue
+            
+            # --- 1. Object Detection (NEW) ---
+            # මෙතනින් තමයි අර අලුත් ෆයිල් එකේ කෝඩ් එක වැඩ කරන්නේ.
+            # මේකෙන් භාණ්ඩ අඳුරගෙන කොටු ඇඳලා Frame එක ආපහු දෙනවා.
+            frame = obj_detector.detect_and_draw(frame)
 
+            # --- 2. Face Recognition Logic (Existing) ---
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            # --- AI Logic ---
             frame_counter += 1
             if frame_counter % 2 == 0: 
                 face_locations = face_recognition.face_locations(rgb_frame, number_of_times_to_upsample=1)
                 last_face_locations = face_locations
                 
-                # BUG FIX: Watchlist එක හිස් නම් Alert එක අනිවාර්යයෙන්ම False කරන්න ඕන
                 if known_face_encodings:
                     face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
                     current_names = []
@@ -124,11 +135,10 @@ def generate_frames():
                     last_face_names = current_names
                     last_alert_status = alert
                 else:
-                    # මෙන්න මේ පේළිය තමයි කලින් අඩු වෙලා තිබ්බේ!
                     last_face_names = ["Visitor"] * len(face_locations)
-                    last_alert_status = False  # <--- FORCE STOP ALERT
+                    last_alert_status = False 
 
-            # --- Drawing ---
+            # --- Drawing Faces ---
             for (top, right, bottom, left), name in zip(last_face_locations, last_face_names):
                 if last_alert_status and name != "Unknown" and name != "Visitor":
                     color = (0, 0, 255) 
@@ -210,12 +220,9 @@ def reset_watchlist():
         for filename in os.listdir(UPLOAD_FOLDER):
             file_path = os.path.join(UPLOAD_FOLDER, filename)
             os.remove(file_path)
-        
-        # මෙමරි එක සුද්ද කරනවා වගේම ALERT එකත් False කරනවා
         known_face_encodings = []
         known_face_names = []
-        last_alert_status = False # <--- වැදගත්ම දේ
-        
+        last_alert_status = False
         print("System Reset Done.")
     except:
         pass
