@@ -1,0 +1,12 @@
+# Python caches
+__pycache__/
+
+# Virtual Environment (මේක කොහොමත් යවන්නේ නෑ)
+venv/
+env/
+
+# Database (මේක යවන්න එපා, Run කරනකොට අලුතෙන් හැදෙනවා)
+face_database.db
+
+# Uploads (පරණ ෆොටෝ යවන්න එපා)
+known_faces/

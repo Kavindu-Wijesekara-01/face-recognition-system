@@ -1,0 +1,8 @@
+flask
+face-recognition
+numpy<2
+opencv-python<4.10
+dlib
+
+
+py -3.11 app.py
